@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{document}
+
+\section*{Algorithms}
+
+\begin{algorithm}
+\caption{Detrending Algorithm}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} NumPy array
+\STATE Convert NumPy array to Pandas series: \texttt{pd.Series}
+\STATE Pass the values (sequence, \texttt{[‘X’]}) as the first argument
+\STATE Pass type (e.g., constant) of detrending as the second argument
+\STATE Calculate the mean value
+\STATE Use rolling function to calculate moving mean
+\STATE \texttt{Rolling\_mean (Rv) = data[‘X’].rolling(window=‘a’, center=True).mean()}
+\STATE \texttt{Detrended = data[‘X’] - Rolling\_mean (Rv)}
+\STATE \textbf{Output:} Detrended series
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{XGBoost Algorithm}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} Features \( X = \{x_1, x_2, \ldots, x_N\} \), \( N = 21 \) initially
+\STATE Traffic flow prediction based on previous data
+\STATE For \( n \) samples and \( m \) predictors
+\STATE Define \( K = \{(x_p, v_p) : |K| = n, x_p \in \mathbb{R}^m, v_p \in \mathbb{R}^m\} \)
+\STATE Object function:
+\[
+\text{argmin} \sum l(v_p, v_p(t))
+\]
+\STATE Where \( v_p \) is the actual value and \( v_p(t) \) is the predicted value
+\STATE Update:
+\[
+v_p(t) = v_p(t-1) + f(t)(x_p)
+\]
+\[
+v_p(t) = \sum f(t)(x_p)
+\]
+\STATE Penalty function (regularization) to avoid overfitting:
+\[
+K = \text{argmin} \sum l(v_p, v_p(t-1) + f(t)(x_p) + \text{Regularization}[f(t)(x_p)])
+\]
+\STATE Optimal solution:
+\[
+\text{Optimal weight} = \text{substitute optimal weight in equation above}
+\]
+\STATE Final prediction (updated output) after total number of iterations
+\STATE XGBoost uses second order Taylor expansions:
+\[
+K = \sum [l(v_p, v_p(t-1)) + g_p f(t)(x_p) + \frac{1}{2} (h_p f^2(t)(x_p))] + \text{Regularization}
+\]
+\STATE Simplified equation:
+\[
+K = \sum [g_p f(t)(x_p) + \frac{1}{2} (h_p f^2(t)(x_p))] + \text{Regularization}
+\]
+\STATE \textbf{Output:} Final predictions
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
